@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 /** ShortLink service implementation class
  * @author Rishi Pathania
@@ -63,5 +64,14 @@ public class ShortLinkServiceImpl implements ShortLinkService {
         if(url.getExpiresDate()!=null  && url.getExpiresDate().isBefore(LocalDateTime.now()))
             throw new LinkExpiredException("Link expired!");
         return url.getLongUrl();
+    }
+
+    @Override
+    public List<Url> deleteExpiredUrls() {
+        LOGGER.info("Deleting the expired URLs");
+        List expiredUrls = urlRepository.getExpiredUrls(LocalDateTime.now());
+        urlRepository.deleteAll(expiredUrls);
+        //List<ShortUrlResponse> shortUrlResponses = expiredUrls.stream().
+        return expiredUrls;
     }
 }

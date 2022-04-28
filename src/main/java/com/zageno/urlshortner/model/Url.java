@@ -1,6 +1,8 @@
 package com.zageno.urlshortner.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -11,19 +13,23 @@ import java.time.LocalDateTime;
  * @version 1.0
  */
 @Entity
-@Table(name = "url_tbl")
+@Table(name = "url")
 public class Url {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "id_generator1")
-    @SequenceGenerator(name="id_generator1",initialValue = 999, allocationSize = 3)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "url_id_generator")
+    @SequenceGenerator(name="url_id_generator",initialValue = 999, allocationSize = 3)
+    @JsonIgnore
     private long id;
 
     @Column(nullable = false)
+    @JsonProperty("long_url")
     private String longUrl;
 
     @Column(nullable = false)
+    @JsonProperty("created_at")
     private LocalDateTime createdDate;
 
+    @JsonProperty("expires_at")
     private LocalDateTime expiresDate;
 
     public long getId() {
