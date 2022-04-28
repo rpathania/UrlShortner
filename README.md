@@ -20,8 +20,8 @@ Algo used for encoding and decoding:
     
    decoding:
    while(i < shortUrl lenght)
-	    counter = i + 1
-	    mapped = base62alphabet.indexOf(shortUrl[i]) 
-	    result = result + mapped * 62^(shortUrl lenght - counter)
-	    i++
+	counter = i + 1
+	mapped = base62alphabet.indexOf(shortUrl[i]) 
+	result = result + mapped * 62^(shortUrl lenght - counter)
+	i++
     
