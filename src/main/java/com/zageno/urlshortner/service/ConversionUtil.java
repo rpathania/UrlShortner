@@ -17,13 +17,12 @@ public class ConversionUtil {
     private int len = allowedCharacters.length;
 
     public String encode(long inputId, long offset){
-        LOGGER.info("offset:"+offset);
-        LOGGER.info("inpiutid:"+offset);
+        LOGGER.info("In encode method");
         StringBuilder encodedString= new StringBuilder();
 
-       /* if(inputId == 0) {
+        if(inputId == 0) {
             return String.valueOf(allowedCharacters[0]);
-        }*/
+        }
 
         while (inputId > 0) {
             encodedString.append(allowedCharacters[(int) (inputId % len)]);
@@ -34,11 +33,12 @@ public class ConversionUtil {
             encodedString.append(allowedCharacters[(int) (offset % len)]);
             offset = offset / len;
         }
-
+        LOGGER.info("SuccessFully encoded the input id with offset");
         return encodedString.reverse().toString();
     }
 
     public long decode(String input) {
+        LOGGER.info("In Decode method");
         char[] characters = input.toCharArray();
         int length = characters.length;
 
@@ -50,6 +50,7 @@ public class ConversionUtil {
             decoded += allowedString.indexOf(characters[i]) * Math.pow(len, length - counter);
             counter++;
         }
+        LOGGER.info("Successfully decoded the input String");
         return decoded;
     }
 

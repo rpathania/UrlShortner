@@ -57,7 +57,7 @@ public class ShortLinkServiceImpl implements ShortLinkService {
         Long urlId = conversionUtil.decode(shortUrl.substring(1));
         LOGGER.info("urlid = "+urlId);
         Long offSet = conversionUtil.getOffsetValue(shortUrl);
-        LOGGER.info("URLID = "+urlId + " off " +offSet);
+        LOGGER.info("URLID = "+urlId + " offset " +offSet);
         Url url = urlRepository.findById(urlId-offSet)
                 .orElseThrow(()-> new EntityNotFoundException("Entity not present for: "+shortUrl));
         if(url.getExpiresDate()!=null  && url.getExpiresDate().isBefore(LocalDateTime.now()))
